@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 # the component, and True when we're ready to package and distribute it.
 # (This is, of course, optional - there are innumerable ways to manage your
 # release process.)
-_RELEASE = False
+_RELEASE = True
 
 # Declare a Streamlit component. `declare_component` returns a function
 # that is used to create instances of the component. We're naming this
@@ -43,26 +43,35 @@ else:
 # `declare_component` and call it done. The wrapper allows us to customize
 # our component's API: we can pre-process its input args, post-process its
 # output value, and add a docstring for users.
-def st_nivo_sankey(name, key=None):
-    """Create a new instance of "my_component".
+def st_nivo_sankey(data: dict,
+                   height : str="400px",
+                   width : str="100%",
+                   use_container_width=False,
+                   key=None):
+    """Creates a Nivo Sankey diagram component.
 
-    Parameters
-    ----------
-    name: str
-        The name of the thing we're saying hello to. The component will display
-        the text "Hello, {name}!"
-    key: str or None
-        An optional key that uniquely identifies this component. If this is
-        None, and the component's arguments are changed, the component will
-        be re-mounted in the Streamlit frontend and lose its current state.
+    Args:
+        data (dict): The data to be displayed in the Sankey diagram.
+        height (str, optional): The height of the component. Defaults to "400px".
+        width (str, optional): The width of the component. Defaults to "100%".
+        use_container_width (bool, optional): Whether to use the full width of the container. Defaults to False.
+        key (str, optional): An optional key that uniquely identifies this component. Defaults to None.
 
-    Returns
-    -------
-    int
-        The number of times the component's "Click Me" button has been clicked.
-        (This is the value passed to `Streamlit.setComponentValue` on the
-        frontend.)
+    Returns:
+        Any: The value of the component after user interaction.
 
+    Example:
+        >>> import streamlit as st
+        >>> from streamlit_nivo_sankey import st_nivo_sankey
+        >>> 
+        >>> data = {
+        ...     "nodes": [{"id": "A"}, {"id": "B"}, {"id": "C"}],
+        ...     "links": [{"source": "A", "target": "B", "value": 10},
+        ...               {"source": "B", "target": "C", "value": 5}]
+        ... }
+        >>> 
+        >>> value = st_nivo_sankey(data=data, height="500px", use_container_width=True)
+        >>> st.write(value)
     """
     # Call through to our private component function. Arguments we pass here
     # will be sent to the frontend, where they'll be available in an "args"
@@ -70,8 +79,5 @@ def st_nivo_sankey(name, key=None):
     #
     # "default" is a special argument that specifies the initial return
     # value of the component before the user has interacted with it.
-    component_value = _component_func(name=name, key=key, default=0)
-
-    # We could modify the value returned from the component if we wanted.
-    # There's no need to do this in our simple example - but it's an option.
+    component_value = _component_func(data=data, key=key, default=0)
     return component_value

@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import MyComponent from "./MyComponent"
+import NivoSankey from "./NivoSankey"
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyComponent />
+    <NivoSankey />
   </React.StrictMode>,
   document.getElementById("root")
 )
