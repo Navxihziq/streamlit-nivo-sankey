@@ -31,7 +31,7 @@ jobs:
           node-version: 20
       - name: build frontend
         run: |
-          cd streamlit_nivo_sanket/frontend/
+          cd streamlit_nivo_sankey/frontend/
           npm install
           npm run build
       - name: Install dependencies
