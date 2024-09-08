@@ -4,7 +4,7 @@ import {
   withStreamlitConnection,
 } from "streamlit-component-lib"
 import React, { ReactNode } from "react"
-import { ResponsiveSankey, SankeyNodeDatum } from "@nivo/sankey"
+import { ResponsiveSankey } from "@nivo/sankey"
 
 interface Props {
   data: Record<string, any>
@@ -12,7 +12,7 @@ interface Props {
 }
 
 class NivoSankey extends StreamlitComponentBase<Props> {
-  public render(): React.ReactNode {
+  public render(): ReactNode {
     // check if custom colors are provided
     const customColors = this.props.args["custom_colors"]
     console.log(customColors)
