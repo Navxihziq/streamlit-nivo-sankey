@@ -1,5 +1,5 @@
 # streamlit-nivo-sankey
-
+[![Upload Python Package](https://github.com/Navxihziq/streamlit-nivo-sankey/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Navxihziq/streamlit-nivo-sankey/actions/workflows/python-publish.yml)
 This is a Streamlit component that lets you create Nivo Sankey diagrams. Please check out Nivo's amazing page on [Sankey](https://nivo.rocks/sankey/) for more information.
 
 This project is still in early development. More granular control, testing, and documentation, and development guide will come soon. Stay tuned!
