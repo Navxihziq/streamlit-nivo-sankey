@@ -4,7 +4,7 @@ import {
   withStreamlitConnection,
 } from "streamlit-component-lib"
 import React, { ReactNode } from "react"
-import { ResponsiveSankey } from "@nivo/sankey"
+import { ResponsiveSankey, SankeyNodeDatum } from "@nivo/sankey"
 
 interface Props {
   data: Record<string, any>
@@ -13,13 +13,22 @@ interface Props {
 
 class NivoSankey extends StreamlitComponentBase<Props> {
   public render(): React.ReactNode {
+    // check if custom colors are provided
+    const customColors = this.props.args["custom_colors"]
+    console.log(customColors)
     const width = this.props.args["useContainerWidth"] ? "100%" : "600px"
     return (
       <div style={{ height: "400px", width: width }}>
         <ResponsiveSankey
           data={this.props.args["data"]}
+          colors={customColors || { scheme: "nivo" }}
+          nodeBorderColor={{
+            from: "color",
+            modifiers: [["darker", 0.8]],
+          }}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
           align="justify"
+          enableLinkGradient={true}
           onClick={this.onClick}
         />
       </div>
